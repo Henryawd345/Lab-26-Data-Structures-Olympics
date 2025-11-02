@@ -168,31 +168,31 @@ int main() {
 
     cout << "Number of simulations: " << runs << "\n";
 
-    cout << left << setw(12) << " Operation"
-         << setw(12) << "Vector(us)"
-         << setw(12) << "List(us)"
-         << setw(12) << "Set(us)" << "\n";
+    cout << left << setw(16) << " Operation"
+         << setw(16) << "Vector(us)"
+         << setw(16) << "List(us)"
+         << setw(16) << "Set(us)" << "\n";
 
-    cout << left << setw(12) << "      Read"
-         << setw(12) << avg[ReadEvent][Vec]
-         << setw(12) << avg[ReadEvent][List]
-         << setw(12) << avg[ReadEvent][Set] << "\n";
+    cout << left << setw(16) << "      Read"
+         << setw(16) << avg[ReadEvent][Vec]
+         << setw(16) << avg[ReadEvent][List]
+         << setw(16) << avg[ReadEvent][Set] << "\n";
 
-    cout << left << setw(12) << "      Sort"
-         << setw(12) << avg[SortEvent][Vec]
-         << setw(12) << avg[SortEvent][List]
-         << setw(12) << avg[SortEvent][Set];
+    cout << left << setw(16) << "      Sort"
+         << setw(16) << avg[SortEvent][Vec]
+         << setw(16) << avg[SortEvent][List]
+         << setw(16) << avg[SortEvent][Set];
     cout << "\n";
 
-    cout << left << setw(12) << "      Insert"
-         << setw(12) << avg[InsertEvent][Vec]
-         << setw(12) << avg[InsertEvent][List]
-         << setw(12) << avg[InsertEvent][Set] << "\n";
+    cout << left << setw(16) << "      Insert"
+         << setw(16) << avg[InsertEvent][Vec]
+         << setw(16) << avg[InsertEvent][List]
+         << setw(16) << avg[InsertEvent][Set] << "\n";
 
-    cout << left << setw(12) << "      Delete"
-         << setw(12) << avg[DeleteEvent][Vec]
-         << setw(12) << avg[DeleteEvent][List]
-         << setw(12) << avg[DeleteEvent][Set] << "\n";
+    cout << left << setw(16) << "      Delete"
+         << setw(16) << avg[DeleteEvent][Vec]
+         << setw(16) << avg[DeleteEvent][List]
+         << setw(16) << avg[DeleteEvent][Set] << "\n";
 
     return 0;
 }
