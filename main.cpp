@@ -125,7 +125,7 @@ void oneSimulation(const vector<string>& lines, long long out[events][structs]){
         set_del_us = duration_cast<microseconds>(end - start).count();
     }
 
-    // Write this run’s 12 numbers
+    // Store this run's 12 timing results into the 3D array
     out[ReadEvent][Vec]   = vec_read_us;
     out[ReadEvent][List]   = lst_read_us;
     out[ReadEvent][Set]   = set_read_us;
@@ -144,6 +144,7 @@ void oneSimulation(const vector<string>& lines, long long out[events][structs]){
 
 }
 
+// driver: run 15 times, average, and print polished table
 int main() {
     vector<string> lines = read_lines("codes.txt");
     if (lines.empty()) {
@@ -151,25 +152,32 @@ int main() {
       return 1;
     }
 
+    // 3D results cube: results[run][event][structure]
+    // run = 0 .. runs-1  → store each simulation’s 4×3 timings (per-run data)
+    // run = accuIndex    → accumulator slice (sums across all runs for each [event][structure])
+    // After the loop, avg[e][d] = results[accuIndex][e][d] / runs.
     static long long results[runs + 1][events][structs] = {0};
 
+    // run experiments
     for (int i = 0; i < runs; i++){
         long long one[events][structs] = {0};
         oneSimulation(lines, one);
 
         for (int e = 0; e < events; ++e) {
             for (int d = 0; d < structs; ++d) {
-                results[i][e][d] += one[e][d];
-                results[accuIndex][e][d] += one[e][d];
+                results[i][e][d] += one[e][d]; // store per-run
+                results[accuIndex][e][d] += one[e][d]; // add to totals
             }
         }
     }
 
+    // Compute averages
     long long avg[events][structs] = {0};
     for (int e = 0; e < events; ++e)
         for (int d = 0; d < structs; ++d)
             avg[e][d] = results[accuIndex][e][d] / runs;
 
+    // Output
     cout << "Number of simulations: " << runs << "\n";
 
     cout << left << setw(16) << " Operation"
