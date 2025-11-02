@@ -11,26 +11,29 @@
 using namespace std;
 using namespace std::chrono;
 
-const int runs = 15;
-const int events = 4;
-const int structs = 3;
-const int accuIndex = runs;
+const int runs = 15; // number of  simulations to average
+const int events = 4; // {Read, Sort, Insert, Delete}
+const int structs = 3; // {Vector, List, Set}
+const int accuIndex = runs; // totals slice at the end of the first dimension
 
+// Named instead of using number for clarity
 enum Event {ReadEvent = 0, SortEvent = 1, InsertEvent = 2, DeleteEvent = 3};
 enum DS {Vec = 0, List = 1, Set = 2};
 
+// file loader 
 vector<string> read_lines(const string &path){
     ifstream in(path);
     vector<string> lines;
     string s;
-    lines.reserve(20000);
+    lines.reserve(20000);  
     while (getline(in, s)) lines.push_back(s);
     return lines;
 }
 
+// one full trial
 void oneSimulation(const vector<string>& lines, long long out[events][structs]){
     long long vec_read_us, lst_read_us, set_read_us;
-    long long vec_sort_us, lst_sort_us, set_sort_us = 0;
+    long long vec_sort_us, lst_sort_us, set_sort_us = 0; // set already ordered
     long long vec_ins_us,  lst_ins_us,  set_ins_us;
     long long vec_del_us,  lst_del_us,  set_del_us;
     //us = microsecond
@@ -122,6 +125,7 @@ void oneSimulation(const vector<string>& lines, long long out[events][structs]){
         set_del_us = duration_cast<microseconds>(end - start).count();
     }
 
+    // Write this run’s 12 numbers
     out[ReadEvent][Vec]   = vec_read_us;
     out[ReadEvent][List]   = lst_read_us;
     out[ReadEvent][Set]   = set_read_us;
