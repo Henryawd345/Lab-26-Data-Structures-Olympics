@@ -11,10 +11,10 @@
 using namespace std;
 using namespace std::chrono;
 
-int runs = 15;
-int events = 4;
-int structs = 3;
-int accuIndex = runs;
+const int runs = 15;
+const int events = 4;
+const int structs = 3;
+const int accuIndex = runs;
 
 enum Event {ReadEvent = 0, SortEvent = 1, InsertEvent = 2, DeleteEvent = 3};
 enum DS {Vec = 0, List = 1, Set = 2};
@@ -121,6 +121,22 @@ void oneSimulation(const vector<string>& lines, long long out[events][structs]){
         auto end = high_resolution_clock::now();
         set_del_us = duration_cast<microseconds>(end - start).count();
     }
+
+    out[ReadEvent][Vec]   = vec_read_us;
+    out[ReadEvent][List]   = lst_read_us;
+    out[ReadEvent][Set]   = set_read_us;
+
+    out[SortEvent][Vec]   = vec_sort_us;
+    out[SortEvent][List]   = lst_sort_us;
+    out[SortEvent][Set]   = set_sort_us; // 0
+
+    out[InsertEvent][Vec] = vec_ins_us;
+    out[InsertEvent][List] = lst_ins_us;
+    out[InsertEvent][Set] = set_ins_us;
+
+    out[DeleteEvent][Vec] = vec_del_us;
+    out[DeleteEvent][List] = lst_del_us;
+    out[DeleteEvent][Set] = set_del_us;
 
 }
 
