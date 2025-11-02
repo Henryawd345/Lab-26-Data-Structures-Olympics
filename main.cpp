@@ -28,15 +28,9 @@ vector<string> read_lines(const string &path){
     return lines;
 }
 
-int main() {
-    vector<string> lines = read_lines("codes.txt");
-    if (lines.empty()) {
-      cerr << "ERROR: couldn't read codes.txt\n";
-      return 1;
-    }
-
+void oneSimulation(const vector<string>& lines, long long out[events][structs]){
     long long vec_read_us, lst_read_us, set_read_us;
-    long long vec_sort_us, lst_sort_us, set_sort_us = -1;
+    long long vec_sort_us, lst_sort_us, set_sort_us = 0;
     long long vec_ins_us,  lst_ins_us,  set_ins_us;
     long long vec_del_us,  lst_del_us,  set_del_us;
     //us = microsecond
@@ -127,6 +121,17 @@ int main() {
         auto end = high_resolution_clock::now();
         set_del_us = duration_cast<microseconds>(end - start).count();
     }
+
+}
+
+int main() {
+    vector<string> lines = read_lines("codes.txt");
+    if (lines.empty()) {
+      cerr << "ERROR: couldn't read codes.txt\n";
+      return 1;
+    }
+
+    
 
 
     cout << left << setw(12) << "Operation"
