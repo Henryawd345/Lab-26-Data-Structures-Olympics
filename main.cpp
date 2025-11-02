@@ -11,6 +11,11 @@
 using namespace std;
 using namespace std::chrono;
 
+int runs = 15;
+int events = 4;
+int structs = 3;
+
+
 vector<string> read_lines(const string &path){
     ifstream in(path);
     vector<string> lines;
