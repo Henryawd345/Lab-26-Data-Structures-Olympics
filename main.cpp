@@ -168,29 +168,28 @@ int main() {
 
     cout << "Number of simulations: " << runs << "\n";
 
-    cout << left << setw(12) << "Operation"
+    cout << left << setw(12) << " Operation"
          << setw(12) << "Vector(us)"
          << setw(12) << "List(us)"
          << setw(12) << "Set(us)" << "\n";
 
-    cout << left << setw(12) << "Read"
+    cout << left << setw(12) << "      Read"
          << setw(12) << avg[ReadEvent][Vec]
          << setw(12) << avg[ReadEvent][List]
          << setw(12) << avg[ReadEvent][Set] << "\n";
 
-    cout << left << setw(12) << "Sort"
+    cout << left << setw(12) << "      Sort"
          << setw(12) << avg[SortEvent][Vec]
          << setw(12) << avg[SortEvent][List]
          << setw(12) << avg[SortEvent][Set];
-    if (avg[SortEvent][Set] == 0) cout << " (Already sorted)";
     cout << "\n";
 
-    cout << left << setw(12) << "Insert"
+    cout << left << setw(12) << "      Insert"
          << setw(12) << avg[InsertEvent][Vec]
          << setw(12) << avg[InsertEvent][List]
          << setw(12) << avg[InsertEvent][Set] << "\n";
 
-    cout << left << setw(12) << "Delete"
+    cout << left << setw(12) << "      Delete"
          << setw(12) << avg[DeleteEvent][Vec]
          << setw(12) << avg[DeleteEvent][List]
          << setw(12) << avg[DeleteEvent][Set] << "\n";
