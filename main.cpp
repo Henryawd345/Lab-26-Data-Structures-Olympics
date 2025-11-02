@@ -14,7 +14,10 @@ using namespace std::chrono;
 int runs = 15;
 int events = 4;
 int structs = 3;
+int accuIndex = runs;
 
+enum Event {ReadEvent = 0, SortEvent = 1, InsertEvent = 2, DeleteEvent = 3};
+enum DS {Vec = 0, List = 1, Set = 2};
 
 vector<string> read_lines(const string &path){
     ifstream in(path);
