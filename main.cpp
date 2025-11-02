@@ -147,35 +147,53 @@ int main() {
       return 1;
     }
 
-    
+    static long long results[runs + 1][events][structs] = {0};
 
+    for (int i = 0; i < runs; i++){
+        long long one[events][structs] = {0};
+        oneSimulation(lines, one);
+
+        for (int e = 0; e < events; ++e) {
+            for (int d = 0; d < structs; ++d) {
+                results[i][e][d] += one[e][d];
+                results[accuIndex][e][d] += one[e][d];
+            }
+        }
+    }
+
+    long long avg[events][structs] = {0};
+    for (int e = 0; e < events; ++e)
+        for (int d = 0; d < structs; ++d)
+            avg[e][d] = results[accuIndex][e][d] / runs;
+
+    cout << "Number of simulations: " << runs << "\n";
 
     cout << left << setw(12) << "Operation"
-        << setw(12) << "Vector(us)"
-        << setw(12) << "List(us)"
-        << setw(12) << "Set(us)" << "\n";
+         << setw(12) << "Vector(us)"
+         << setw(12) << "List(us)"
+         << setw(12) << "Set(us)" << "\n";
 
     cout << left << setw(12) << "Read"
-        << setw(12) << vec_read_us
-        << setw(12) << lst_read_us
-        << setw(12) << set_read_us << "\n";
+         << setw(12) << avg[ReadEvent][Vec]
+         << setw(12) << avg[ReadEvent][List]
+         << setw(12) << avg[ReadEvent][Set] << "\n";
 
-   cout << left << setw(12) << "Sort"
-        << setw(12) << vec_sort_us
-        << setw(12) << lst_sort_us
-        << setw(12) << set_sort_us << " (Already sorted)" <<"\n";
+    cout << left << setw(12) << "Sort"
+         << setw(12) << avg[SortEvent][Vec]
+         << setw(12) << avg[SortEvent][List]
+         << setw(12) << avg[SortEvent][Set];
+    if (avg[SortEvent][Set] == 0) cout << " (Already sorted)";
+    cout << "\n";
 
     cout << left << setw(12) << "Insert"
-        << setw(12) << vec_ins_us
-        << setw(12) << lst_ins_us
-        << setw(12) << set_ins_us << "\n";
+         << setw(12) << avg[InsertEvent][Vec]
+         << setw(12) << avg[InsertEvent][List]
+         << setw(12) << avg[InsertEvent][Set] << "\n";
 
     cout << left << setw(12) << "Delete"
-         << setw(12) << vec_del_us
-         << setw(12) << lst_del_us
-         << setw(12) << set_del_us << "\n";
-
-    
+         << setw(12) << avg[DeleteEvent][Vec]
+         << setw(12) << avg[DeleteEvent][List]
+         << setw(12) << avg[DeleteEvent][Set] << "\n";
 
     return 0;
 }
